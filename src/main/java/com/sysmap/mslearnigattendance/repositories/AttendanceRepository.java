@@ -8,4 +8,5 @@ import java.util.UUID;
 
 @Repository
 public interface AttendanceRepository extends CrudRepository<Attendance, UUID> {
+    Attendance getAttendanceByStudentId(UUID studentId);
 }
