@@ -16,7 +16,7 @@ public class CourseAPIService {
     public CourseAPIService(
             WebClient.Builder webClientBuilder,
             @Value("${course-api-url}")
-                    String courseApiURL
+            String courseApiURL
     ) {
         this.courseApi = webClientBuilder.baseUrl(courseApiURL).build();
     }
