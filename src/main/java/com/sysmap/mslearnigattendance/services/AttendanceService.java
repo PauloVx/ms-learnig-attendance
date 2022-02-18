@@ -17,15 +17,17 @@ public class AttendanceService {
         StudentService studentService
     ) {
         this.attendanceRepository = attendanceRepository;
+        this.studentService = studentService;
     }
 
-    public void save(Attendance attendance) {
+    public Boolean save(Attendance attendance) {
         if(!this.studentService.existsById(attendance.getStudentId())) {
             log.warn("Attempted to save a new attendance for invalid student id.");
-            return;
+            return false;
         }
 
         this.attendanceRepository.save(attendance);
         log.info("Saved new Attendance for student with id: " + attendance.getStudentId());
+        return true;
     }
 }
