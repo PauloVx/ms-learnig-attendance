@@ -5,6 +5,8 @@ import com.sysmap.mslearnigattendance.repositories.StudentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @Slf4j
 public class StudentService {
@@ -20,5 +22,9 @@ public class StudentService {
     public void save(Student student) {
         this.studentRepository.save(student);
         log.info("Saved new Student - Id: " + student.getStudentId());
+    }
+
+    public Boolean existsById(UUID studentId) {
+        return this.studentRepository.existsById(studentId);
     }
 }
