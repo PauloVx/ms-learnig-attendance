@@ -4,13 +4,11 @@ import com.sysmap.mslearnigattendance.controllers.models.RegisterAttendanceInput
 import com.sysmap.mslearnigattendance.entities.Attendance;
 import com.sysmap.mslearnigattendance.services.AttendanceService;
 import com.sysmap.mslearnigattendance.services.CourseAPIService;
+import com.sysmap.mslearnigattendance.services.models.GetAttendancesByStudentResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -49,5 +47,13 @@ public class AttendanceController {
         if(!savedWithSuccess || !isCourseIdValid) return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
 
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/student/{studentId}/attendances")
+    public ResponseEntity<GetAttendancesByStudentResponse> getStudentAttendances(
+        @PathVariable UUID studentId
+    ) {
+        var attendances = this.attendanceService.getAttendancesByStudentId(studentId);
+        return new ResponseEntity<>(attendances, HttpStatus.OK);
     }
 }
