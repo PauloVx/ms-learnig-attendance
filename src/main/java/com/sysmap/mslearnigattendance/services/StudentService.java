@@ -27,4 +27,8 @@ public class StudentService {
     public Boolean existsById(UUID studentId) {
         return this.studentRepository.existsById(studentId);
     }
+
+    public Student getStudentById(UUID studentId) {
+        return this.studentRepository.findById(studentId).get();
+    }
 }
